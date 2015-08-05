@@ -35,7 +35,7 @@ public class Lotto {
             }
             list.add(lottoResource.map.get(i));
         }
-        return new LottoNumbers(list);
+        return new LottoNumbers.Builder(list).build();
     }
 
 

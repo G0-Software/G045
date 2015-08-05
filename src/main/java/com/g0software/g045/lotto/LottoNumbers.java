@@ -15,40 +15,47 @@ public class LottoNumbers {
     private Map<Integer, Integer> bonusMap = new HashMap<>();
     private Map<Integer, Integer> allNumberMap = new HashMap<>();
 
-    public LottoNumbers(List<LottoNumber> lottoNumberList) {
-        for (LottoNumber lottoNumber : lottoNumberList) {
-            setNumberMap(lottoNumber.getNumbers());
-            setBonusMap(lottoNumber.getBonus());
-            setAllNumberMap(lottoNumber.getAllNumbers());
+    public class Builder {
+
+        LottoNumbers lottoNumbers;
+
+        public Builder(List<LottoNumber> list) {
+            for (LottoNumber lottoNumber : lottoNumberList) {
+                setNumberMap(lottoNumber.getNumbers());
+                setBonusMap(lottoNumber.getBonus());
+                setAllNumberMap(lottoNumber.getAllNumbers());
+            }
         }
+
+        private void setBonusMap(Integer bonus) {
+            Map<Integer, Integer> map = new HashMap<>();
+            setMap(lottoNumbers.bonusMap, bonus);
+        }
+
+        private void setAllNumberMap(List<Integer> allNumbers) {
+            Map<Integer, Integer> map = new HashMap<>();
+            for (Integer i : allNumbers) {
+                setMap(lottoNumbers.allNumberMap, i);
+            }
+        }
+
+        private void setNumberMap(List<Integer> numbers) {
+            Map<Integer, Integer> map = new HashMap<>();
+            for (Integer i : numbers) {
+                setMap(lottoNumbers.numberMap, i);
+            }
+        }
+
+        private void setMap(Map<Integer, Integer> map, Integer i) {
+            if (map.get(i) == null) {
+                map.put(i, 1);
+            } else {
+                map.put(i, map.get(i) + 1);
+            }
+        }
+
     }
 
-    private void setBonusMap(Integer bonus) {
-        Map<Integer, Integer> map = new HashMap<>();
-        setMap(bonusMap, bonus);
-    }
-
-    private void setAllNumberMap(List<Integer> allNumbers) {
-        Map<Integer, Integer> map = new HashMap<>();
-        for (Integer i : allNumbers) {
-            setMap(allNumberMap, i);
-        }
-    }
-
-    private void setNumberMap(List<Integer> numbers) {
-        Map<Integer, Integer> map = new HashMap<>();
-        for (Integer i : numbers) {
-            setMap(numberMap, i);
-        }
-    }
-
-    private void setMap(Map<Integer, Integer> map, Integer i) {
-        if (map.get(i) == null) {
-            map.put(i, 1);
-        } else {
-            map.put(i, map.get(i) + 1);
-        }
-    }
 
     public String minSix() {
         LinkedHashMap<Integer, Integer> map = sort(numberMap);
@@ -127,5 +134,7 @@ public class LottoNumbers {
     public String byLottoNumber(LottoNumber lottoNumber) {
 return null;
     }
+
+
 
 }
