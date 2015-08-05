@@ -94,7 +94,13 @@ public class LottoNumbers {
 
     @Override
     public String toString() {
-        return super.toString();
+        LinkedHashMap<Integer, Integer> map = sort(numberMap);
+
+        StringBuilder sb = new StringBuilder();
+        for (Integer num : map.keySet()) {
+            sb.append(num + " : " + map.get(num) + "\n");
+        }
+        return sb.toString();
     }
 
     public LinkedHashMap sort(final Map map){
@@ -117,4 +123,9 @@ public class LottoNumbers {
 
         return result;
     }
+
+    public String byLottoNumber(LottoNumber lottoNumber) {
+return null;
+    }
+
 }

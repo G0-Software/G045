@@ -19,7 +19,7 @@ public class Lotto {
 
     public static Lotto create() throws IOException {
         Lotto lotto = new Lotto();
-        lotto.lottoResource = new LottoResource(new File("G045/src/main/resources/lotto.txt"));
+        lotto.lottoResource = new LottoResource(new File("src/main/resources/lotto.txt"));
         return lotto;
     }
 
@@ -39,5 +39,7 @@ public class Lotto {
     }
 
 
-
+    public LottoNumber getLottoNumber(int i) {
+        return lottoResource.map.get(i);
+    }
 }
