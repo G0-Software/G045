@@ -27,12 +27,17 @@ public class LottoResource {
 
             String[] lottos = line.split("[,:]");
             for (int i = 0; i < 6; i++) {
-                numbers.add(Integer.parseInt(lottos[i]));
-                allNumbers.add(Integer.parseInt(lottos[i]));
+                try {
+                    numbers.add(Integer.parseInt(lottos[i]));
+                    allNumbers.add(Integer.parseInt(lottos[i]));
+                }catch (Exception e){}
             }
             ln.setNumbers(numbers);
-            ln.setBonus(Integer.parseInt(lottos[6]));
-            allNumbers.add(Integer.parseInt(lottos[6]));
+            try {
+                ln.setBonus(Integer.parseInt(lottos[6]));
+                allNumbers.add(Integer.parseInt(lottos[6]));
+            }catch (Exception e){
+            }
             ln.setAllNumbers(allNumbers);
             ln.setEpisode(++episode);
             map.put(episode, ln);

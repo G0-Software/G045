@@ -17,9 +17,9 @@ public class Lotto {
 
     private Lotto(){};
 
-    public static Lotto create() throws IOException {
+    public static Lotto create(File resource) throws IOException {
         Lotto lotto = new Lotto();
-        lotto.lottoResource = new LottoResource(new File("src/main/resources/lotto.txt"));
+        lotto.lottoResource = new LottoResource(resource);
         return lotto;
     }
 
@@ -29,12 +29,14 @@ public class Lotto {
 
     public LottoNumbers getLottoNumbers(int start, int end){
         List<LottoNumber> list = new ArrayList<>();
+
         for (int i = start; i <= end; i++) {
             if(lottoResource.map.get(i) == null){
                 break;
             }
             list.add(lottoResource.map.get(i));
         }
+
         return new LottoNumbers(list);
     }
 

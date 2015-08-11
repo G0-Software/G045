@@ -21,7 +21,7 @@ public class LottoNumber {
 
     private List<Integer> allNumbers;
 
-    private Integer bonus;
+    private int bonus;
 
     public int getEpisode() {
         return episode;
@@ -43,7 +43,7 @@ public class LottoNumber {
         return bonus;
     }
 
-    public void setBonus(Integer bonus) {
+    public void setBonus(int bonus) {
         this.bonus = bonus;
     }
 
@@ -59,6 +59,17 @@ public class LottoNumber {
         sb.append(numbers.get(5));
         sb.append("\n");
         sb.append("bonus : " + bonus + "\n");
+
+        return sb.toString();
+    }
+
+    public String toStringSimple() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 5; i++) {
+            sb.append(numbers.get(i) + ",");
+        }
+        sb.append(numbers.get(5));
+        sb.append(":" + bonus);
 
         return sb.toString();
     }
