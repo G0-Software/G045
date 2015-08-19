@@ -12,12 +12,12 @@ public class FileWriteUtils {
     public static void write(File file, String string) throws IOException {
         if(file.exists()){
             file.delete();
-            file.createNewFile();
         }
+        file.createNewFile();
         FileWriter fw = null;
         try {
-            new FileWriter(file, true);
-            fw.append(string);
+            fw = new FileWriter(file, true);
+            fw.write(string);
             fw.flush();
         }finally {
             if(fw != null){
