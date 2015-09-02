@@ -97,31 +97,32 @@ public class LottoNumbers {
         return null;
     }
 
-    public List<Integer> getAllNumberRankDesc(Integer ... i) {
+    public List<String> getAllNumberRankDesc(Integer ... i) {
         return getRate(allNumberDescRankMap, i);
     }
 
-    public List<Integer> getAllNumberRankAsc(Integer ... i) {
+    public List<String> getAllNumberRankAsc(Integer ... i) {
         return getRate(allNumberAscRankMap, i);
     }
 
-    public List<Integer> getNumberRankDesc(Integer ... i) {
+    public List<String> getNumberRankDesc(Integer ... i) {
         return getRate(numberDescRankMap, i);
     }
 
-    public List<Integer> getNumberRankAsc(Integer ... i) {
+    public List<String> getNumberRankAsc(Integer ... i) {
         return getRate(numberAscRankMap, i);
     }
 
-    public List<Integer> getBonusRankDesc(Integer ... i) {
+    public List<String> getBonusRankDesc(Integer ... i) {
         return getRate(bonusDescRankMap, i);
     }
 
-    public List<Integer> getBonusRankAsc(Integer ... i) {
+    public List<String> getBonusRankAsc(Integer ... i) {
         return getRate(bonusAscRankMap, i);
     }
 
     public String byLottoNumber(LottoNumber lottoNumber) {
+//        System.out.println(mapToString(numberDescRankMap));
         Map<Integer, Integer> map = new HashMap<>();
         for (int i : lottoNumber.getAllNumbers()) {
             map.put(i, numberDescRankMap.get(i));
@@ -199,19 +200,34 @@ public class LottoNumbers {
         Map<Integer, Integer> map = new HashMap<>();
         int r = 1;
         LinkedHashMap<Integer, Integer> sMap = sort(nMap, sort);
+        int beforeCnt = (sort == Sort.DESC) ? 1: 45;
         for (int i : sMap.keySet()) {
-            map.put(i, r++);
+            int count = sMap.get(i);
+            if(sort == Sort.DESC) {
+                if (beforeCnt > count) {
+                    map.put(i, ++r);
+                } else {
+                    map.put(i, r);
+                }
+            }else{
+                if (beforeCnt < count) {
+                    map.put(i, ++r);
+                } else {
+                    map.put(i, r);
+                }
+            }
+            beforeCnt = count;
         }
+
         return map;
     }
 
-    private List<Integer> getRate(Map<Integer,Integer> map, Integer ... i){
-        List<Integer> list = new ArrayList<>();
+    private List<String> getRate(Map<Integer,Integer> map, Integer ... i){
+        List<String> list = new ArrayList<>();
         for (int a : i) {
             for(Integer key : map.keySet()){
                 if(map.get(key).intValue() == a){
-
-                    list.add(key);
+                    list.add(a + ":" + key);
                     continue;
                 }
             }
